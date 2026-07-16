@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@RFOF-NETWORK - EuroChain / IICB</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; margin: 0; }
+        .box { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        input { display: block; width: 100%; margin: 10px 0; padding: 12px; border-radius: 4px; border: 1px solid #475569; background: #334155; color: white; box-sizing: border-box; }
+        button { background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 5px; }
+        button:hover { background: #1d4ed8; }
+        .hidden { display: none; }
+        .chain-log { font-family: monospace; background: #020617; padding: 12px; border-radius: 4px; color: #10b981; max-height: 250px; overflow-y: auto; font-size: 12px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <div style="max-width: 600px; margin: 0 auto; padding-top: 20px;">
+        <h1>🦅 Golden Phoenix Central Bank (IICB)</h1>
+        
+        <!-- SCHRITT 1: ANMELDUNG -->
+        <div id="auth-section" class="box">
+            <h2>System-Zugang (Inland-Status)</h2>
+            <input type="text" id="username" placeholder="Benutzername">
+            <input type="password" id="password" placeholder="Passwort">
+            <button onclick="system.createAccount()">Account Registrieren / Einloggen</button>
+        </div>
+
+        <!-- SCHRITT 2: DASHBOARD (NACH LOGIN) -->
+        <div id="dashboard-section" class="box hidden">
+            <h2>Willkommen, <span id="user-display" style="color:#38bdf8;"></span></h2>
+            <p>System-Status: <span style="color:#10b981;">● Autonom & Validiert</span></p>
+            
+            <!-- FIAT PORTFOLIO -->
+            <div class="box" style="background:#334155;">
+                <h3>Fiat-Ebene (Account-Basiert)</h3>
+                <p>Guthaben: <strong>100.000,00 EUR</strong> (Verbriefte Liquidität)</p>
+            </div>
+
+            <!-- WALLET VERWALTUNG -->
+            <div id="wallet-setup" class="box" style="background:#334155;">
+                <h3>Krypto-Ebene (EVM & BTC Ready)</h3>
+                <button onclick="system.generateWallet()" style="background:#10b981;">Neue autonome Wallet generieren</button>
+                <p style="text-align: center; margin: 10px 0;">oder</p>
+                <input type="text" id="import-addr" placeholder="0x... oder BTC Adresse">
+                <button onclick="system.importWallet()" style="background:#475569;">Adresse manuell verknüpfen</button>
+            </div>
+
+            <!-- AKTIVE WALLET ANZEIGE -->
+            <div id="wallet-active" class="box hidden" style="background:#020617; border: 1px solid #10b981;">
+                <h3>Aktive Wallet-Verbindung</h3>
+                <p><strong>Öffentliche Adresse (Sichtbar in der Chain):</strong></p>
+                <p id="wallet-address" style="color:#10b981; word-break:break-all; background:#1e293b; padding:8px; border-radius:4px;"></p>
+                
+                <p><strong>Geheime Phrasen (Nur intern einsehbar!):</strong></p>
+                <p id="wallet-keys" style="color:#ef4444; word-break:break-all; background:#1e293b; padding:8px; border-radius:4px; font-family:monospace;"></p>
+            </div>
+
+            <button onclick="system.logout()" style="background:#dc2626; margin-top:20px;">System verlassen (Logout)</button>
+        </div>
+
+        <!-- SIMULTANE BLOCKCHAIN KETTE -->
+        <div class="box">
+            <h3>Simultane Status- & Verifikationskette (Unveränderbar)</h3>
+            <div id="chain-output" class="chain-log">System bereit. Warte auf Interaktion...</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
